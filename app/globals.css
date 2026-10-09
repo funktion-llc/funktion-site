@@ -10,7 +10,7 @@ a{color:var(--ink)}a:hover{color:var(--accent)}
 .fkh-art{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
 .fkd-tangle{stroke-dasharray:1;stroke-dashoffset:1;animation:fkd-draw 4s cubic-bezier(.37,0,.63,1) .8s forwards}
 .fkd-stamp{transform-box:fill-box;transform-origin:center;opacity:0;animation:fkd-stamp .5s cubic-bezier(.2,1.6,.4,1) 4.7s forwards}
-.fkd-spin{transform-box:fill-box;transform-origin:center;animation:fkd-spin 20s linear 5.2s infinite}
+.fkd-spin{transform-box:fill-box;transform-origin:center;animation:fkd-spin 14s linear infinite}
 .fkd-cap{opacity:0;animation:fkd-fade .4s ease-out 5.1s forwards}
 .fkd-wire{stroke-dasharray:1;stroke-dashoffset:1;animation:fkd-draw .45s ease-out forwards}
 .fkd-w0{animation-delay:5.1s}.fkd-w1{animation-delay:5.5s}.fkd-w2,.fkd-w3{animation-delay:5.9s}.fkd-w4,.fkd-w5{animation-delay:6.3s}
