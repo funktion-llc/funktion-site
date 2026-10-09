@@ -33,23 +33,40 @@ export default function Home() {
 
   useFixMorph();
 
-  // Phone diagram plays once, on its own clock, when it scrolls into view.
+  // Phone diagram follows your scroll, smoothed so it glides instead of jerking.
+  // The drawing is a 6s timeline of CSS animations; scroll position picks the moment.
   useEffect(() => {
-    const el = document.querySelector(".fkm-art");
-    if (!el) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) {
-            el.classList.add("is-in");
-            io.disconnect();
-          }
-        }
-      },
-      { threshold: 0.2 }
-    );
-    io.observe(el);
-    return () => io.disconnect();
+    const el = document.querySelector<SVGSVGElement>(".fkm-art");
+    if (!el || !el.getAnimations) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const TOTAL = 6000;
+    let anims: Animation[] = [];
+    let q = 0;
+    let raf = 0;
+    const collect = () => {
+      anims = el
+        .getAnimations({ subtree: true })
+        .filter((a) => (a as CSSAnimation).animationName !== "fk-float");
+      anims.forEach((a) => {
+        a.pause();
+        a.currentTime = q * TOTAL;
+      });
+    };
+    const frame = () => {
+      raf = requestAnimationFrame(frame);
+      if (getComputedStyle(el).display === "none") return;
+      if (!anims.length) collect();
+      const r = el.getBoundingClientRect();
+      const vh = window.innerHeight || 800;
+      const p = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (r.height * 0.9)));
+      const next = q + (p - q) * 0.14;
+      if (Math.abs(next - q) < 0.0004 && Math.abs(p - q) < 0.0004) return;
+      q = Math.abs(p - next) < 0.0004 ? p : next;
+      const t = q * TOTAL;
+      for (const a of anims) a.currentTime = t;
+    };
+    raf = requestAnimationFrame(frame);
+    return () => cancelAnimationFrame(raf);
   }, []);
 
   const word = WORDS[i % WORDS.length];

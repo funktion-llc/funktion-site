@@ -176,7 +176,6 @@ a{color:var(--ink)}a:hover{color:var(--accent)}
 .fkm-w0{--de:2.7s;--du:.45s}.fkm-w1{--de:3.2s;--du:.35s}.fkm-w2,.fkm-w3{--de:3.65s;--du:.4s}.fkm-w4,.fkm-w5{--de:4.15s;--du:.45s}
 .fkm-step{transform-box:fill-box;animation:fkd-pop .45s cubic-bezier(.2,.7,.2,1) var(--de,0s) both}
 .fkm-n0{--de:3.0s}.fkm-n1{--de:3.5s}.fkm-n2,.fkm-n3{--de:4.0s}.fkm-n4{--de:4.55s}
-.fkm-art:not(.is-in) *{animation-play-state:paused!important}
 }
 
 .fx-root{--page:#1f3a4a;--ink:#efe9dc;--muted:#b9c4c4;--rule:#2f4f60;--accent:#9b9b6b;--accentink:#0e1a22;--line:#efe9dc;--tag:#efe9dc;--tagink:#0e1a22;--tagnum:#1f3a4a;--btn:#efe9dc;--btnink:#1f3a4a;--band:#9b9b6b;--bandink:#0e1a22;--stampink:#0e1a22;--stampkey:#7e7e54;--blend:multiply;transition:background-color .6s ease,color .6s ease}
