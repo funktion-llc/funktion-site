@@ -8,7 +8,7 @@ a{color:var(--ink)}a:hover{color:var(--accent)}
 .stock{position:relative;isolation:isolate}
 .stock::after{content:"";position:absolute;inset:0;pointer-events:none;background:url(/brand/funktion-paper-grain.webp) 0 0/384px 384px repeat;mix-blend-mode:overlay;opacity:.55;z-index:30}
 .fkh-art{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
-.fkd-tangle{stroke-dasharray:1;stroke-dashoffset:1;animation:fkd-draw 4s cubic-bezier(.45,0,.25,1) .8s forwards}
+.fkd-tangle{stroke-dasharray:1;stroke-dashoffset:1;animation:fkd-draw 4s cubic-bezier(.37,0,.63,1) .8s forwards}
 .fkd-stamp{transform-box:fill-box;transform-origin:center;opacity:0;animation:fkd-stamp .5s cubic-bezier(.2,1.6,.4,1) 4.7s forwards}
 .fkd-spin{transform-box:fill-box;transform-origin:center;animation:fkd-spin 20s linear 5.2s infinite}
 .fkd-cap{opacity:0;animation:fkd-fade .4s ease-out 5.1s forwards}
@@ -21,13 +21,12 @@ a{color:var(--ink)}a:hover{color:var(--accent)}
 @keyframes fkd-draw{to{stroke-dashoffset:0}}
 .fk-pain{fill:var(--ink);stroke:var(--page);stroke-width:6px;stroke-linejoin:round;paint-order:stroke fill;transition:fill .6s ease,stroke .6s ease}
 .fkd-drift,.fkm-drift{transform-box:fill-box;transform-origin:center}
-.fkd-drift{animation-name:fk-drift;animation-timing-function:ease-in-out;animation-fill-mode:none}
-@keyframes fk-drift{0%,100%{transform:none}25%{transform:translate(var(--dx),var(--dy)) rotate(var(--dr))}50%{transform:translate(calc(var(--dx)*-.7),calc(var(--dy)*.6)) rotate(calc(var(--dr)*-1))}75%{transform:translate(calc(var(--dx)*.5),calc(var(--dy)*-1)) rotate(calc(var(--dr)*.6))}}
-@keyframes fk-drift-scroll{0%,100%{transform:none}12%{transform:translate(var(--dx),var(--dy)) rotate(var(--dr))}25%{transform:translate(calc(var(--dx)*-.8),calc(var(--dy)*.5)) rotate(calc(var(--dr)*-1))}37%{transform:translate(calc(var(--dx)*.6),calc(var(--dy)*-1)) rotate(calc(var(--dr)*.7))}50%{transform:translate(calc(var(--dx)*-1),calc(var(--dy)*-.4)) rotate(calc(var(--dr)*-.5))}62%{transform:translate(calc(var(--dx)*.8),calc(var(--dy)*.9)) rotate(var(--dr))}75%{transform:translate(calc(var(--dx)*-.4),calc(var(--dy)*-.8)) rotate(calc(var(--dr)*-.8))}87%{transform:translate(calc(var(--dx)*.3),calc(var(--dy)*.4)) rotate(calc(var(--dr)*.3))}}
-@media (prefers-reduced-motion:reduce){.fkd-drift{animation:none}}
+.fkd-drift,.fkm-drift{animation:fk-float var(--fd,6s) ease-in-out var(--fdl,0s) infinite alternate}
+@keyframes fk-float{from{transform:translate(calc(var(--dx)*-.6),calc(var(--dy)*-.6)) rotate(calc(var(--dr)*-.35))}to{transform:translate(calc(var(--dx)*.6),calc(var(--dy)*.6)) rotate(calc(var(--dr)*.35))}}
+@media (prefers-reduced-motion:reduce){.fkd-drift,.fkm-drift{animation:none}}
 
-.fkd-pop{opacity:0;transform-box:fill-box;transform-origin:center;animation:fkd-pain .45s cubic-bezier(.2,.9,.3,1.2) var(--d) forwards}
-@keyframes fkd-pain{0%{opacity:0;transform:scale(.3) rotate(-14deg)}60%{opacity:1;transform:scale(1.1) rotate(3deg)}100%{opacity:1;transform:none}}
+.fkd-pop{opacity:0;transform-box:fill-box;transform-origin:center;animation:fk-ink .6s cubic-bezier(.2,.7,.2,1) var(--d) both}
+@keyframes fk-ink{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.fkd-pop{opacity:1;animation:none}}
 
 .fkd-dot{opacity:0;animation:fkd-in .25s ease .7s forwards}@keyframes fkd-in{to{opacity:1}}
@@ -169,21 +168,16 @@ a{color:var(--ink)}a:hover{color:var(--accent)}
 }
 .fk-tab .sh{display:none}
 @media (max-width:900px){.fk-tab .sh{display:inline}}
-@media (max-width:900px) and (prefers-reduced-motion:no-preference){@supports (animation-timeline:view()){
-.fkm-art{view-timeline-name:--fkm}
-.fkm-draw{stroke-dasharray:1;stroke-dashoffset:1;animation:fkd-draw linear both;animation-timeline:--fkm}
-.fkm-tangle{animation-range:cover 4% cover 34%}
-.fkm-drift{animation:fk-drift-scroll linear both;animation-timeline:--fkm;animation-range:cover var(--a2) cover 66%}
-.fkm-pop{transform-box:fill-box;transform-origin:center;animation:fkd-pain linear both;animation-timeline:--fkm;animation-range:cover var(--a) cover var(--b)}
-.fkm-w0{animation-range:cover 36% cover 44%}
-.fkm-w1{animation-range:cover 46% cover 51%}
-.fkm-w2,.fkm-w3{animation-range:cover 53% cover 59%}
-.fkm-w4,.fkm-w5{animation-range:cover 61% cover 67%}
-.fkm-s0{animation-range:cover 68% cover 70%}.fkm-s1{animation-range:cover 70% cover 72%}.fkm-s2{animation-range:cover 72% cover 74%}.fkm-s3{animation-range:cover 74% cover 76%}
-.fkm-stamp{transform-box:fill-box;transform-origin:center;animation:fkd-stamp linear both;animation-timeline:--fkm;animation-range:cover 32% cover 37%}
-.fkm-step{transform-box:fill-box;animation:fkd-pop linear both;animation-timeline:--fkm}
-.fkm-n0{animation-range:cover 42% cover 46%}.fkm-n1{animation-range:cover 50% cover 54%}.fkm-n2,.fkm-n3{animation-range:cover 58% cover 62%}.fkm-n4{animation-range:cover 66% cover 70%}
-}}
+@media (max-width:900px) and (prefers-reduced-motion:no-preference){
+.fkm-draw{stroke-dasharray:1;stroke-dashoffset:1;animation:fkd-draw var(--du,.4s) cubic-bezier(.37,0,.63,1) var(--de,0s) both}
+.fkm-tangle{--de:0s;--du:2.4s}
+.fkm-pop{transform-box:fill-box;transform-origin:center;animation:fk-ink .5s cubic-bezier(.2,.7,.2,1) var(--a,0s) both}
+.fkm-stamp{transform-box:fill-box;transform-origin:center;animation:fkd-stamp .5s cubic-bezier(.2,.9,.3,1.15) 2.35s both}
+.fkm-w0{--de:2.7s;--du:.45s}.fkm-w1{--de:3.2s;--du:.35s}.fkm-w2,.fkm-w3{--de:3.65s;--du:.4s}.fkm-w4,.fkm-w5{--de:4.15s;--du:.45s}
+.fkm-step{transform-box:fill-box;animation:fkd-pop .45s cubic-bezier(.2,.7,.2,1) var(--de,0s) both}
+.fkm-n0{--de:3.0s}.fkm-n1{--de:3.5s}.fkm-n2,.fkm-n3{--de:4.0s}.fkm-n4{--de:4.55s}
+.fkm-art:not(.is-in) *{animation-play-state:paused!important}
+}
 
 .fx-root{--page:#1f3a4a;--ink:#efe9dc;--muted:#b9c4c4;--rule:#2f4f60;--accent:#9b9b6b;--accentink:#0e1a22;--line:#efe9dc;--tag:#efe9dc;--tagink:#0e1a22;--tagnum:#1f3a4a;--btn:#efe9dc;--btnink:#1f3a4a;--band:#9b9b6b;--bandink:#0e1a22;--stampink:#0e1a22;--stampkey:#7e7e54;--blend:multiply;transition:background-color .6s ease,color .6s ease}
 .fx-root[data-theme="services"]{--page:#9b9b6b;--ink:#0e1a22;--muted:#262f1c;--rule:#7e7e54;--accent:#1f3a4a;--accentink:#efe9dc;--line:#0e1a22;--tag:#efe9dc;--tagink:#0e1a22;--tagnum:#1f3a4a;--btn:#0e1a22;--btnink:#efe9dc;--band:#1f3a4a;--bandink:#efe9dc;--stampink:#efe9dc;--stampkey:#9b9b6b;--blend:normal}
